@@ -1,0 +1,45 @@
+# Data handling
+numpy
+pandas
+
+# Visualization
+matplotlib
+seaborn
+
+# Database and SQL
+SQLAlchemy
+psycopg2-binary
+
+# Web scraping and APIs
+requests
+beautifulsoup4
+lxml
+scrapy
+
+# Machine learning
+scikit-learn
+scipy
+joblib
+
+# Natural Language Processing
+nltk
+spacy
+transformers
+
+# Deep Learning
+tensorflow
+torch
+
+# Recommendation systems
+surprise
+implicit
+
+# Web frameworks
+flask
+streamlit
+
+# PDF generation
+fpdf
+
+# Optional utilities
+python-dotenv
