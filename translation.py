@@ -87,4 +87,4 @@ for idx, row in tqdm(df.iterrows(), total=len(df)):
 # Guardar resultado
 df.to_csv("data/full_data/libros_completados.csv", index=False)
 
-print("✅ Traducción y romanización completadas.")
+print("Traducción y romanización completadas.")
