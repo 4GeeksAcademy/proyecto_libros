@@ -37,19 +37,19 @@ def traducir(texto, src="auto", dest="en", max_length=4500):
         return GoogleTranslator(source=src, target=dest).translate(texto)
     except Exception:
         # Si falla (texto muy largo), dividirlo
-        print(f"✂️ Fragmentando texto largo para traducir...")
+        print(f"Fragmentando texto largo para traducir...")
         partes = [texto[i:i+max_length] for i in range(0, len(texto), max_length)]
         traducido = ""
         for parte in partes:
             try:
                 traducido += GoogleTranslator(source=src, target=dest).translate(parte) + " "
             except Exception as e:
-                print(f"⚠️ Error traduciendo fragmento: {e}")
+                print(f"Error traduciendo fragmento: {e}")
                 traducido += parte + " "
         return traducido.strip()
 
 # Cargar CSV
-df = pd.read_csv("data/full_data/libros_completados.csv")
+df = pd.read_csv("data/full_data/libros_completados_final.csv")
 
 # Procesar cada fila con tqdm
 for idx, row in tqdm(df.iterrows(), total=len(df)):
@@ -85,6 +85,6 @@ for idx, row in tqdm(df.iterrows(), total=len(df)):
         df.at[idx, 'publisher'] = traducir(publisher)
 
 # Guardar resultado
-df.to_csv("data/full_data/libros_completados.csv", index=False)
+df.to_csv("data/full_data/traduccion_libros.csv", index=False)
 
 print("Traducción y romanización completadas.")
