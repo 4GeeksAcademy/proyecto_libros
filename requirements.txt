@@ -43,3 +43,6 @@ fpdf
 
 # Optional utilities
 python-dotenv
+
+sentence_transformers
+faiss-cpu
