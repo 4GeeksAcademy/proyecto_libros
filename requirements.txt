@@ -46,3 +46,4 @@ python-dotenv
 
 sentence_transformers
 faiss-cpu
+streamlit
