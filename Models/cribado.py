@@ -16,7 +16,6 @@ def load_dataset():
     return df
 df_filter_model = load_dataset()
 
-# Cargar datos del CSV
 def load_df(csv_path: str):
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"CSV not found at {csv_path}")

@@ -27,12 +27,11 @@ render_sidebar()
 
 st.title("Discover your next favorite book")
 
-# Load everything (con caché opcional)
 @st.cache_resource
 def load_all():
     df = load_dataset()
-    embedder = load_embedder()      # ← carga LOCAL
-    index, embs = load_faiss_artifacts()  # ← lee archivos locales
+    embedder = load_embedder()    
+    index, embs = load_faiss_artifacts() 
     if index is None:
         st.error("FAISS index not found in data/final_data/. Sube faiss_index.idx y embeddings.npy al repo.")
         st.stop()
@@ -40,7 +39,6 @@ def load_all():
 
 df_semantic, embedder, faiss_index = load_all()
 
-# UI inputs
 query = st.text_area("Describe what you'd like to read", placeholder="e.g., A cozy fantasy adventure with dragons")
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
@@ -55,7 +53,6 @@ with col3:
     lang_choice = st.selectbox("Language", options=["(any)"] + lang_labels_sorted)
     selected_lang_code = None if lang_choice == "(any)" else {v: k for k, v in name_by_code.items()}[lang_choice]
 
-# Run search
 if st.button("Search semantically", type="primary"):
     results, msg = semantic_recommend(
         query=query,

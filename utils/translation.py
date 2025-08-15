@@ -48,7 +48,6 @@ def traducir(texto, src="auto", dest="en", max_length=4500):
                 traducido += parte + " "
         return traducido.strip()
 
-# Cargar CSV
 df = pd.read_csv("data/full_data/libros_completados_final.csv")
 
 # Procesar cada fila con tqdm
@@ -84,7 +83,6 @@ for idx, row in tqdm(df.iterrows(), total=len(df)):
     if detectar_idioma(publisher) != "en":
         df.at[idx, 'publisher'] = traducir(publisher)
 
-# Guardar resultado
 df.to_csv("data/full_data/traduccion_libros.csv", index=False)
 
 print("Traducción y romanización completadas.")

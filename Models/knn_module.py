@@ -6,12 +6,10 @@ from sklearn.neighbors import NearestNeighbors
 import random
 import streamlit as st
 
-# 1. Load and preprocess dataset (cached for performance)
 @st.cache_resource
 def load_dataset():
     df = pd.read_csv("data/final_data/df_web.csv")
     df = df.drop(columns=['Unnamed: 0'], errors='ignore')
-    # Format columns
     df['genres'] = df['genres'].apply(ast.literal_eval if isinstance(df['genres'].iloc[0], str) else lambda x: x)
     df['author'] = df['author'].apply(lambda x: [a.strip() for a in x.split(',')])
     df['normalized_title'] = df['title'].str.strip().str.lower()
@@ -20,7 +18,6 @@ def load_dataset():
 def load_df_knn(csv_path):
     df = pd.read_csv(csv_path)
 
-    # Si es string tipo lista, lo evalúa; si no, lo pone como lista de un solo autor
     def safe_parse_author(x):
         if isinstance(x, str):
             try:
@@ -35,7 +32,6 @@ def load_df_knn(csv_path):
 
     df["author"] = df["author"].apply(safe_parse_author)
 
-    # Igual para géneros si los necesitas como lista
     def safe_parse_genres(x):
         if isinstance(x, str):
             try:

@@ -19,16 +19,14 @@ def show_cards(df: pd.DataFrame):
             if isinstance(url, str) and url and url.lower() != "nan":
                 st.image(url, width=100, clamp=True)
         with c2:
-            # título + autor + rating
             title = row.get("title","")
             author = row.get("author","")
-            if isinstance(author, list):  # por si viene como lista
+            if isinstance(author, list):  
                 author = ", ".join([str(a) for a in author if a])
             st.markdown(f"### {title}")
             st.markdown(f"**Author:** {author}")
             st.markdown(stars(row.get("rating", np.nan)))
 
-            # descripción
             desc = row.get("description","") or ""
             if desc:
                 suffix = "…" if len(desc) > 240 else ""
@@ -37,7 +35,6 @@ def show_cards(df: pd.DataFrame):
                     unsafe_allow_html=True
                 )
 
-            # idioma + editorial (si existen en este df)
             language = row.get("language", "")
             publisher = row.get("publisher", "")
             if language:
@@ -51,7 +48,6 @@ def show_cards(df: pd.DataFrame):
                     unsafe_allow_html=True
                 )
 
-            # géneros: acepta string o lista
             genres_raw = row.get("genres", "")
             if isinstance(genres_raw, list):
                 gens = [g.strip() for g in genres_raw if str(g).strip()]
@@ -60,7 +56,6 @@ def show_cards(df: pd.DataFrame):
             if gens:
                 st.caption(" · ".join(gens))
 
-            # trofeo/awards
             aw_val = row.get("awards", row.get("AWARDS", 0))
             has_award = False
             try:

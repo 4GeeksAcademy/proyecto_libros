@@ -3,12 +3,10 @@ from utils.home_style import apply_css_styles, render_logo, load_image_base64, r
 
 st.set_page_config(page_title="ReadMeUp", layout="wide", initial_sidebar_state="expanded")
 
-# Estilos y logo
 apply_css_styles()
 render_logo()
 render_sidebar() 
 
-# Imágenes
 reader = load_image_base64("images/background-1.png")
 how = load_image_base64("images/pila-libros.png")
 bg = load_image_base64("images/Vector.png")
@@ -17,7 +15,6 @@ lupa = load_image_base64("images/lupa.png")
 check = load_image_base64("images/check.png")
 
 
-# TITULAR Y LECTORA
 st.markdown(f"""
 <div class="title-block">
     <div class="title-text">
@@ -28,7 +25,6 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# SECCIÓN HOW IT WORKS
 st.markdown(f"""
 <div class="how-section">
     <div class="how-box">

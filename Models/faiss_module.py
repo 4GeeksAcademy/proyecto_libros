@@ -7,11 +7,10 @@ import streamlit as st
 from sentence_transformers import SentenceTransformer
 from utils.language import lang_to_iso, iso_to_display
 
-# Rutas locales
 DATA_DIR = "data/final_data"
-MODEL_PATH = "models/all-MiniLM-L6-v2"  # Modelo guardado en el repo
-IDX_PATH = os.path.join(DATA_DIR, "faiss_index.idx")  # Ajusta al nombre real
-EMB_PATH = os.path.join(DATA_DIR, "embeddings.npy")   # Ajusta al nombre real
+MODEL_PATH = "models/all-MiniLM-L6-v2"  
+IDX_PATH = os.path.join(DATA_DIR, "faiss_index.idx") 
+EMB_PATH = os.path.join(DATA_DIR, "embeddings.npy") 
 
 @st.cache_data(show_spinner=False)
 def load_dataset():

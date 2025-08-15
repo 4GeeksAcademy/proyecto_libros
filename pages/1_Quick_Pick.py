@@ -8,7 +8,6 @@ from utils.sorting import sort_df_by_title_lns, sort_lns_iterable
 
 st.set_page_config(page_title="ReadMeUp – Quick_Pick", layout="wide", initial_sidebar_state="expanded")
 
-# Estilos y logo
 apply_inner_styles()
 render_logo()
 render_sidebar()
@@ -20,19 +19,17 @@ with st.spinner("Loading data..."):
 
 st.title("Personalized recommendations based on your tastes")
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    title_kw = st.text_input("Search by title")
-with col2:
-    author_kw = st.text_input("Search by author")
-with col3:
-    genre_kw = st.multiselect("Select genre(s)", GENRES)
+title_kw = st.text_input("Search by title", key="title_kw")
+author_kw = st.text_input("Search by author", key="author_kw")
+c1, c2 = st.columns(2)
+with c1:
+    genre_kw = st.multiselect("Select genre(s)", GENRES, key="genre_kw")
+with c2:
+    lang_kw = st.selectbox("Language", [""] + sort_lns_iterable(df["language"].unique()), key="lang_kw")
 
-col4, col5 = st.columns(2)
-with col4:
-    lang_kw = st.selectbox("Language", [""] + sort_lns_iterable(df["language"].unique()))
-with col5:
-    pub_kw = st.text_input("Search by publisher")
+run_search  = st.button("Search results", type="primary")
+
+pub_kw = "" 
 
 results = apply_multi_filter(df, title_kw, author_kw, genre_kw, lang_kw, pub_kw)
 
@@ -43,10 +40,14 @@ else:
     results = sort_df_by_title_lns(results)
 
 st.subheader(f"Results ({len(results)})")
-page_size = st.selectbox("Results per page", [10, 20, 30], index=1)
-n_pages = max(1, int(np.ceil(len(results) / page_size)))
-page = st.number_input("Page", 1, n_pages, 1)
+
+p1, p2 = st.columns([1, 1])
+with p1:
+    page_size = st.selectbox("Results per page", [10, 20, 30], index=1)
+with p2:
+    n_pages = max(1, int(np.ceil(len(results) / page_size)))
+    page = st.number_input("Page", 1, n_pages, 1)
+
 start = (page - 1) * page_size
 end = start + page_size
-
 show_cards(results.iloc[int(start):int(end)])

@@ -5,7 +5,7 @@ import threading
 import os
 from typing import List, Dict
 
-# 📚 Lista de keywords temáticas (basado en SUBJECTS)
+#Palabras que queremos incluir
 KEYWORDS = [
     "historical fiction", "mystery", "thriller", "romance", "fantasy",
     "science fiction", "horror", "young adult", "adventure",
@@ -123,7 +123,7 @@ KEYWORDS = [
     "reincarnation fiction", "Wattpad", "Wattpad books", "Wattpad story"
 ]
 
-# 🚫 Palabras clave que queremos excluir
+# Palabras clave que queremos excluir
 BLACKLIST = {
     "medicine", "health", "psychology", "self_help", "religion", "spirituality",
     "philosophy", "politics", "history", "biography", "business", "economics",
@@ -154,7 +154,7 @@ BLACKLIST = {
     "essays", "anthologies","plays", "tourism", "travel guides", "cultural studies",
     "geography", "world history", "archaeology", "anthropology",
 }
-# 📁 Archivo CSV de salida
+# Archivo CSV de salida
 OUTPUT_FILE = "books_2020_to_2025.csv"
 TARGET_TOTAL = 25000
 MAX_THREADS = 30
@@ -169,24 +169,24 @@ COLUMNS = [
 books_lock = threading.Lock()
 all_books: List[Dict] = []
 
-# 🔁 Reanudar si existe
+# Reanudar si existe
 if os.path.exists(OUTPUT_FILE):
     with open(OUTPUT_FILE, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             all_books.append(row)
-    print(f"🔁 Reanudando desde {len(all_books)} libros ya guardados.")
+    print(f"Reanudando desde {len(all_books)} libros ya guardados.")
 else:
-    print("▶️ Iniciando nueva colección de libros por keyword...")
+    print("Iniciando nueva colección de libros por keyword...")
 
 existing_isbns = {book["ISBN"] for book in all_books if book.get("ISBN")}
 
-# 🧹 Filtro de keywords usando la blacklist
+# Filtro de keywords usando la blacklist
 filtered_keywords = [kw for kw in KEYWORDS if not any(bl in kw.lower() for bl in BLACKLIST)]
-print(f"📌 Palabras clave filtradas: {len(filtered_keywords)}")
+print(f"Palabras clave filtradas: {len(filtered_keywords)}")
 
 if not filtered_keywords:
-    print("❌ No quedan keywords tras aplicar la blacklist. Revisa las listas.")
+    print("No quedan keywords tras aplicar la blacklist. Revisa las listas.")
     exit()
 
 
@@ -214,7 +214,7 @@ def fetch_books_by_keyword(keyword: str) -> List[Dict]:
                 for item in items:
                     volume = item.get("volumeInfo", {})
 
-                    # 📅 Filtrar por año 2020-2025
+                    #Filtrar por año 2020-2025
                     pub_date = volume.get("publishedDate", "")
                     if not any(pub_date.startswith(str(y)) for y in range(2020, 2026)):
                         continue
@@ -269,7 +269,7 @@ def worker(keyword: str):
     found = fetch_books_by_keyword(keyword)
     with books_lock:
         all_books.extend(found)
-        print(f"✅ {len(found)} libros encontrados en '{keyword}'")
+        print(f"{len(found)} libros encontrados en '{keyword}'")
 
 
 def save_csv():
@@ -279,7 +279,7 @@ def save_csv():
         writer.writerows(all_books)
 
 
-# 🔁 Bucle principal hasta alcanzar el total
+#Bucle principal hasta alcanzar el total
 while len(all_books) < TARGET_TOTAL:
     for i in range(0, len(filtered_keywords), MAX_THREADS):
         batch = filtered_keywords[i: i + MAX_THREADS]
@@ -293,13 +293,13 @@ while len(all_books) < TARGET_TOTAL:
             t.join()
 
         save_csv()
-        print(f"💾 Guardados {len(all_books)} libros en {OUTPUT_FILE}")
+        print(f"Guardados {len(all_books)} libros en {OUTPUT_FILE}")
 
         if len(all_books) >= TARGET_TOTAL:
-            print("🎯 ¡Has alcanzado los 25.000 libros! Puedes parar si quieres.")
+            print("¡Has alcanzado los 25.000 libros! Puedes parar si quieres.")
             break
 
-    print("🔁 Reintentando keywords para seguir buscando...")
+    print("Reintentando keywords para seguir buscando...")
     time.sleep(10)
 
-print("🏁 Proceso finalizado. Total de libros:", len(all_books))
+print("Proceso finalizado. Total de libros:", len(all_books))

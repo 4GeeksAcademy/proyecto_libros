@@ -147,7 +147,6 @@ def apply_css_styles():
     z-index: 10;
 }
 
-/* Mostrar al pasar el ratón */
 .sidebar-footer .avatar:hover .tooltip {
     visibility: visible;
     opacity: 1;
