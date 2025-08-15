@@ -130,7 +130,7 @@ We implemented three different recommendation approaches:
 
 ## Project Structure
 
-PROYECTO
+PROYECTO 
 ├── .streamlit
 │   └── config.toml
 ├── .vscode
@@ -145,9 +145,11 @@ PROYECTO
 │   ├── eda2.ipynb
 │   └── busqueda.ipynb
 
-- In **streamlit**, the main color has been defined. In **data**, we have saved all the endings with which we have already executed the project, including the final df and the embedding and faiss index from the FAISS section. 
-- In the **EDA** folder, you will find the search files in which we have merged data from Google Books and Open Library with our main Data Frame. In eda1, we have done an intensive clean-up and created graphs with results. In EDA 2, we have realized the model.
-
+- In **streamlit**, the main color has been defined.  
+- In **data**, we have saved all the endings with which we have already executed the project, including the final df and the embedding and faiss index from the FAISS section.  
+- In the **EDA** folder, you will find the search files in which we have merged data from Google Books and Open Library with our main Data Frame.  
+  - In eda1, we have done an intensive clean-up and created graphs with results.  
+  - In eda2, we have realized the model.  
 
 ├── full_data
 │   ├── datos
@@ -155,12 +157,12 @@ PROYECTO
 │   │   └── data_2020.ipynb
 │   └── full_data.ipynb
 
-- In full_data, we have combined the main df, which only had data up to 2020, with another df that includes data from 2020 to 2025.
+- In **full_data**, we have combined the main df (which only had data up to 2020) with another df that includes data from 2020 to 2025.
 
 ├── images
 ├── Models
-│   ├──  __pycache__
-│   ├──  all-MiniLM-L6-v2
+│   ├── __pycache__
+│   ├── all-MiniLM-L6-v2
 │   │   ├── __init__.py
 │   │   ├── cribado.py
 │   │   ├── faiss_module.py
@@ -174,34 +176,33 @@ PROYECTO
 │   ├── 2_Smart_Match.py
 │   └── 3_Deep_Dive.py
 
-- **images** contains all the images that are displayed in the interface.
-- **Models** contains the three main files for each model we have created. This folder contains the functions for each model, which are then executed in the **/pages** section. 
-    - cribado.py belongs to the functions of pages/1_Quick_pick.py
-- knn_module.py to pages/2_Smart_Match.py
-- faiss_module.py to pages/3_Deep_Dive.py
-
-- The **all-MiniLM-L6-v2** folder stores a local copy of the embeddings model downloaded with SentenceTransformer.
-
-- **notebooks** are the raw files we worked on at the beginning and then converted to .py, which would be the ones in the /Models folder, although many changes have been made.
+- **images** contains all the images displayed in the interface.  
+- **Models** contains the three main files for each model we created:  
+  - `cribado.py` → used in `pages/1_Quick_Pick.py`  
+  - `knn_module.py` → used in `pages/2_Smart_Match.py`  
+  - `faiss_module.py` → used in `pages/3_Deep_Dive.py`  
+- The **all-MiniLM-L6-v2** folder stores a local copy of the embeddings model downloaded with SentenceTransformer.  
+- **notebooks** are the raw experimental files from the beginning, later converted into `.py` files for `/Models`.  
 
 ├── utils
-│ ├── pycache
-│ ├── init.py
-│ ├── cards.py
-│ ├── home_style.py
-│ ├── inner_pages.py
-│ ├── language.py
-│ ├── sorting.py
-│ ├── time_out.py
-│ └── translation.py
+│   ├── __pycache__
+│   ├── __init__.py
+│   ├── cards.py
+│   ├── home_style.py
+│   ├── inner_pages.py
+│   ├── language.py
+│   ├── sorting.py
+│   ├── time_out.py
+│   └── translation.py
 
-- **utils** is a folder where files shared across multiple pages are stored.
-    - The styles for the home page are in home_styles, and those for the other pages are in inner_pages.
-    - Cards contains the format in which the book results are displayed, which is shared by all three pages. 
-    - In language, a mapping has been created between language names and their ISO codes because in the EDA they were given two letters and here in the interface we wanted the full name to appear.
-    - In sorting, priority has been given to all results appearing first with letters, then numbers, then symbols, and then empty.
-    - In time_out, an infinite keep-alive loop has been created so that the process does not close due to inactivity.
-    - traslation is responsible for converting text from non-Latin alphabets such as Japanese, Korean, or Chinese to Latin characters.
+- **utils** contains shared files across multiple pages:  
+  - `home_style.py` → CSS styles for the home page.  
+  - `inner_pages.py` → CSS styles for internal pages.  
+  - `cards.py` → formatting for book results (shared by all three pages).  
+  - `language.py` → mapping between language names and ISO codes.  
+  - `sorting.py` → prioritizes sorting (letters, numbers, symbols, empty).  
+  - `time_out.py` → infinite keep-alive loop to prevent inactivity shutdown.  
+  - `translation.py` → romanizes Japanese, Korean, and Chinese text to Latin characters.  
 
 ├── download_model.py
 ├── Home.py
@@ -209,11 +210,12 @@ PROYECTO
 ├── requirements.txt
 └── runtime.txt
 
-- **download_models** downloads and saves the embeddings model so that it does not have to be downloaded again each time the repository is accessed.
-- **Home** is the main file.
-- **requirements** stores all the necessary installations.
-- **runtime** is a file that stores the Python version after a conflict.
+- **download_model.py** → downloads and saves the embeddings model locally.  
+- **Home.py** → main entry point for the app.  
+- **requirements.txt** → lists all necessary dependencies.  
+- **runtime.txt** → stores the Python version used after a conflict resolution.
 
+- 
 ## Conclusions
 
 This project taught us about imperfect data, iterative problem-solving, and adapting to hurdles.  
