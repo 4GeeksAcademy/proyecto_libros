@@ -150,8 +150,8 @@ PROYECTO
 - In **streamlit**, the main color has been defined.  
 - In **data**, we have saved all the endings with which we have already executed the project, including the final df and the embedding and faiss index from the FAISS section.  
 - In the **EDA** folder, you will find the search files in which we have merged data from Google Books and Open Library with our main Data Frame.  
-  - In eda1, we have done an intensive clean-up and created graphs with results.  
-  - In eda2, we have realized the model.  
+  - In `eda1`, we have done an intensive clean-up and created graphs with results.  
+  - In `eda2`, we have realized the model.  
 
 ```
 ├── full_data
@@ -220,12 +220,11 @@ PROYECTO
 └── runtime.txt
 ```
 
-- **download_model.py** → downloads and saves the embeddings model locally.  
-- **Home.py** → main entry point for the app.  
-- **requirements.txt** → lists all necessary dependencies.  
-- **runtime.txt** → stores the Python version used after a conflict resolution.
+- `download_model.py` → downloads and saves the embeddings model locally.  
+- `Home.py` → main entry point for the app.  
+- `requirements.txt` → lists all necessary dependencies.  
+- `runtime.txt` → stores the Python version used after a conflict resolution.
 
-- 
 ## Conclusions
 
 This project taught us about imperfect data, iterative problem-solving, and adapting to hurdles.  
