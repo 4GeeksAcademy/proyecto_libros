@@ -131,6 +131,7 @@ We implemented three different recommendation approaches:
 ## Project Structure
 
 PROYECTO 
+```
 ├── .streamlit
 │   └── config.toml
 ├── .vscode
@@ -144,6 +145,7 @@ PROYECTO
 │   ├── eda1.ipynb
 │   ├── eda2.ipynb
 │   └── busqueda.ipynb
+```
 
 - In **streamlit**, the main color has been defined.  
 - In **data**, we have saved all the endings with which we have already executed the project, including the final df and the embedding and faiss index from the FAISS section.  
@@ -151,14 +153,17 @@ PROYECTO
   - In eda1, we have done an intensive clean-up and created graphs with results.  
   - In eda2, we have realized the model.  
 
+```
 ├── full_data
 │   ├── datos
 │   │   ├── data_2020_2025.py
 │   │   └── data_2020.ipynb
 │   └── full_data.ipynb
+```
 
 - In **full_data**, we have combined the main df (which only had data up to 2020) with another df that includes data from 2020 to 2025.
 
+```
 ├── images
 ├── Models
 │   ├── __pycache__
@@ -175,6 +180,7 @@ PROYECTO
 │   ├── 1_Quick_Pick.py
 │   ├── 2_Smart_Match.py
 │   └── 3_Deep_Dive.py
+```
 
 - **images** contains all the images displayed in the interface.  
 - **Models** contains the three main files for each model we created:  
@@ -184,6 +190,7 @@ PROYECTO
 - The **all-MiniLM-L6-v2** folder stores a local copy of the embeddings model downloaded with SentenceTransformer.  
 - **notebooks** are the raw experimental files from the beginning, later converted into `.py` files for `/Models`.  
 
+```
 ├── utils
 │   ├── __pycache__
 │   ├── __init__.py
@@ -194,6 +201,7 @@ PROYECTO
 │   ├── sorting.py
 │   ├── time_out.py
 │   └── translation.py
+```
 
 - **utils** contains shared files across multiple pages:  
   - `home_style.py` → CSS styles for the home page.  
@@ -204,11 +212,13 @@ PROYECTO
   - `time_out.py` → infinite keep-alive loop to prevent inactivity shutdown.  
   - `translation.py` → romanizes Japanese, Korean, and Chinese text to Latin characters.  
 
+```
 ├── download_model.py
 ├── Home.py
 ├── README.md
 ├── requirements.txt
 └── runtime.txt
+```
 
 - **download_model.py** → downloads and saves the embeddings model locally.  
 - **Home.py** → main entry point for the app.  
