@@ -33,7 +33,7 @@ def load_all():
     embedder = load_embedder()    
     index, embs = load_faiss_artifacts() 
     if index is None:
-        st.error("FAISS index not found in data/final_data/. Sube faiss_index.idx y embeddings.npy al repo.")
+        st.error("FAISS index not found in data/final_data/")
         st.stop()
     return df, embedder, index
 
@@ -42,7 +42,7 @@ df_semantic, embedder, faiss_index = load_all()
 query = st.text_area("Describe what you'd like to read", placeholder="e.g., A cozy fantasy adventure with dragons")
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
-    top_n = st.slider("Results", 3, 15, 6)
+    top_n = st.slider("Results", 3, 15, 5)
 with col2:
     rating = st.slider("Min rating", 0, 5, 4, 1)
 with col3:

@@ -58,7 +58,7 @@ def knn_recommend(book_title, exclude_series, exclude_author, top_n, df, embeddi
     """
     book_title = book_title.lower().strip()
     if book_title not in df["normalized_title"].values:
-        return pd.DataFrame(), "❌ Book not found in the dataset."
+        return pd.DataFrame(), "Book not found in the dataset."
 
     idx = df[df["normalized_title"] == book_title].index[0]
 

@@ -28,10 +28,17 @@ else:
 
 selected_book = st.selectbox("Select a book from the list:", filtered_titles) if filtered_titles else None
 
-exclude_series = st.checkbox("Exclude same series", value=True)
-exclude_author = st.checkbox("Exclude same author", value=False)
-top_knn = st.slider("How many recommendations?", 3, 15, 5)
+c1, c2, c3 = st.columns([1, 1, 1]) 
 
+with c1:
+    exclude_series = st.checkbox("Exclude same series", value=True)
+
+with c2:
+    exclude_author = st.checkbox("Exclude same author", value=False)
+
+with c3:
+    top_knn = st.slider("Recommendations", 3, 15, 5)
+    
 if st.button("Find Similar Books", type="primary") and selected_book:
     recs, msg = knn_recommend(
         selected_book, exclude_series, exclude_author, top_knn, df, embedding_matrix, knn_model
