@@ -27,7 +27,7 @@ def apply_css_styles():
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 60px 80px 120px 80px;
+        margin: 60px 80px 40px 80px;
         position: relative;
     }
     .title-text h1 {
@@ -155,13 +155,17 @@ def apply_css_styles():
     </style>
     """, unsafe_allow_html=True)
 
-def render_logo(path="images/logo readmeup.png"):
+def render_logo(path="images/logo readmeup.png", top=38, left=0, width=180, absolute=True):
     logo = load_image_base64(path)
-    st.markdown(f"""
-    <div class="logo-top-left">
-        <img src="data:image/png;base64,{logo}" width="180">
-    </div>
-    """, unsafe_allow_html=True)
+    pos_style = f"position:absolute; top:{top}px; left:{left}px;" if absolute else "position:relative;"
+    st.markdown(
+        f"""
+        <div class="rm-logo" style="{pos_style} z-index:10;">
+            <img src="data:image/png;base64,{logo}" width="{width}">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 @lru_cache(maxsize=None)
 def _img_b64(path: str) -> str:

@@ -2,14 +2,15 @@ import streamlit as st
 import numpy as np
 from Models.knn_module import load_df_knn, knn_recommend, prepare_knn
 from utils.home_style import render_logo, render_sidebar
-from utils.inner_pages import apply_inner_styles
+from utils.inner_pages import apply_inner_styles, set_tab_title, force_sidebar
 from utils.cards import show_cards
 
-st.set_page_config(page_title="ReadMeUp – Smart Match", layout="wide", initial_sidebar_state="expanded")
 apply_inner_styles()
 render_logo()
 render_sidebar()
 
+set_tab_title("ReadMeUp – Smart Match") 
+force_sidebar("expanded") 
 st.title("Which book did you like? Find other similar ones.")
 
 DATA_CSV = 'data/final_data/df_web.csv'
