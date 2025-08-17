@@ -8,7 +8,7 @@ from utils.language import lang_to_iso, iso_to_display
 from sentence_transformers import SentenceTransformer
 from Models.faiss_module import (load_dataset, load_embedder, load_faiss_artifacts, semantic_recommend)
 from utils.home_style import render_logo, render_sidebar
-from utils.inner_pages import apply_inner_styles
+from utils.inner_pages import apply_inner_styles, set_tab_title, force_sidebar
 
 @st.cache_resource
 def load_embedder():
@@ -20,11 +20,12 @@ EMBEDDER = load_embedder()
 FAISS_INDEX = load_faiss_index()
 
 
-st.set_page_config(page_title="ReadMeUp – Deep Dive", layout="wide", initial_sidebar_state="expanded")
 apply_inner_styles()
 render_logo()
 render_sidebar()
 
+set_tab_title("ReadMeUp – Deep-Dive")  
+force_sidebar("expanded")   
 st.title("Discover your next favorite book")
 
 @st.cache_resource

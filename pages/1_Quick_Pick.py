@@ -2,15 +2,17 @@ import streamlit as st
 import numpy as np
 from Models.cribado import load_df, apply_multi_filter
 from utils.home_style import render_logo, render_sidebar
-from utils.inner_pages import apply_inner_styles
+from utils.inner_pages import apply_inner_styles, set_tab_title, force_sidebar
 from utils.cards import show_cards
 from utils.sorting import sort_df_by_title_lns, sort_lns_iterable
 
-st.set_page_config(page_title="ReadMeUp – Quick_Pick", layout="wide", initial_sidebar_state="expanded")
 
 apply_inner_styles()
 render_logo()
 render_sidebar()
+
+set_tab_title("ReadMeUp – QuickPick") 
+force_sidebar("expanded") 
 
 DATA_CSV = 'data/final_data/df_web.csv'
 

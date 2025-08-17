@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 def apply_inner_styles():
     st.markdown("""
@@ -60,12 +61,39 @@ def apply_inner_styles():
     .block-container{
         max-width: 1100px;
         margin: 0 auto;
-        padding: 40px 30px 0 30px;
+        padding: 10px 30px 20px 30px;
     }
     .block-container h1{
-        margin-top: 24px;
+        margin-top: 0px;
         font-size: 28px;
         color: #023047;
     }
+
     </style>
     """, unsafe_allow_html=True)
+
+
+def set_tab_title(title: str):
+    components.html(f"""
+        <script>
+        const t = window.parent.document.querySelector("title");
+        if (t) {{ t.text = {title!r}; }}
+        </script>
+    """, height=0)
+
+def force_sidebar(state: str = "expanded"):
+    wantOpen = (state == "expanded")
+    components.html(f"""
+        <script>
+        function toggleSidebar() {{
+          const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+          const btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+          if (!sidebar || !btn) return;
+          const isOpen = !sidebar.classList.contains("collapsed");
+          if (({str(wantOpen).lower()} && !isOpen) || (!{str(wantOpen).lower()} && isOpen)) {{
+            btn.click();
+          }}
+        }}
+        setTimeout(toggleSidebar, 80);
+        </script>
+    """, height=0)
